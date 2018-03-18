@@ -1,0 +1,105 @@
+%% 13331 
+%%
+%% Visualise a different 2D random walk every time the file is 
+%% opened
+%%
+%% (c) 2018 Vincenzo (KatolaZ) Nicosia <katolaz@freaknet.org>
+%%
+%% Use and distribute under the terms of the GNU General Public Licence
+%% Version 3 or, at your option, any later version.
+%%
+
+/myname (./psrw.ps) def
+/rwstartx 250 def
+/rwstarty 400 def
+/rwlength 500 def
+/rwstep 8 def
+
+/myreadlines {
+  dup 
+  255 string
+  readline
+  { 2 -1 roll myreadlines} {pop exit} ifelse
+} def
+
+/myloadfile {
+  (r) file 
+  {myreadlines} loop 
+  closefile 
+} def
+
+/mywritelines{
+    count
+    1 ne
+    {
+      dup 
+      count -1 roll
+      writestring
+      dup
+      (\n) writestring
+      mywritelines
+     } 
+     {exit} ifelse
+
+} def
+
+/mywritefile {
+ (w) file
+ {mywritelines} loop
+ closefile
+} def
+
+/replacefirst {
+  count -1 roll
+  pop
+  count 1 roll
+} def
+
+
+/get_seed {
+  myname (r) file
+  dup
+  255 string  
+  readline
+  pop
+  (%% ) anchorsearch
+  {pop cvi} {pop 201} ifelse 
+  exch closefile
+} def
+
+%% This comes from GNU Ghostscript
+/concatstrings % (a) (b) -> (ab)  
+   { exch dup length    
+     2 index length add string    
+     dup dup 4 2 roll copy length
+     4 -1 roll putinterval
+   } bind def 
+
+/rndangle { rand 360 mod 2 -1 roll pop } def
+
+/newrndpoint { 
+  rndangle 
+  dup 
+  cos rwstep mul 
+  2 -1 roll 
+  sin rwstep mul 
+} def
+
+erasepage
+
+newpath
+rwstartx rwstarty moveto
+2 setlinewidth
+
+get_seed
+
+srand
+
+1 1 rwlength { newrndpoint rlineto } for
+stroke
+
+myname myloadfile
+(%% ) rand 30 string cvs concatstrings 
+replacefirst
+
+myname mywritefile
