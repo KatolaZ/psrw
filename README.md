@@ -7,16 +7,16 @@ walk every time you open the file `psrw.ps`.
 
 You can open the file with `gv`:
 
-'''
+```
 gv -nosafer -nosafedir psrw.ps
-'''
+```
 
 where the extra options are needed to disable some security checks. You
 can also visualise the document with Ghostscript, if you like:
 
-'''
+```
 gs psrw.ps
-'''
+```
 
 Liked it? Now close the file and reopen it ;-)
 
@@ -61,15 +61,15 @@ files saved in proprietary formats?
 ## Links
 
 - A brief [summary of Poscript
-  commands][http://www.math.ubc.ca/~cass/courses/ps.html]
+  commands](http://www.math.ubc.ca/~cass/courses/ps.html)
 
-- A [game of life][https://www.tjhsst.edu/~edanaher/pslife/] written in
+- A [game of life](https://www.tjhsst.edu/~edanaher/pslife/) written in
 Poscript
 
 - An interesting 
-  [proof][https://nixwindows.wordpress.com/2018/03/13/ed1-is-turing-complete/ 
-] showing that [ed, the standard text
-  editor][http://wiki.c2.com/?EdIsTheStandardTextEditor] is indeed
+  [proof](https://nixwindows.wordpress.com/2018/03/13/ed1-is-turing-complete/ 
+) showing that [ed, the standard text
+  editor](http://wiki.c2.com/?EdIsTheStandardTextEditor) is indeed
 Turing-complete 
 
 ## License
